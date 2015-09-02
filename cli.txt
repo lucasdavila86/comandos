@@ -1,0 +1,13 @@
+== bash
+grep '.m3u8\|Manifest' linkslist.txt | cut -c 29- | cut -d"\"" -f1 | grep _07_2015  >> cleanlinklist.txt
+	#descrp: "takes out the HLS links from a html"
+
+== wget
+wget -m -c --limit-rate=500k ftp://ftp-colsecor:ftpc0ls3c0r@ftp.syt.com/
+	#descrp: "perform a site mirror, limiting the used bandwith and let you continue the download"
+
+== Powershell
+(gci example.txt).LastWriteTime = Get-Date
+	#descrp: update the "Date modified" parameter of example.txt
+foreach ($file in Get-ChildItem) { $file.LastWriteTime = Get-Date }
+	#descrp: update the "Date modified" for all files in the folder

@@ -1,0 +1,9 @@
+ffmpeg -threads 15 -i "rtmp://localhost/live_channel/maxlive live=1" \
+  -re -acodec libfaac -ar 22050 -vcodec libx264 -s svga -b 500k -f flv "rtmp://localhost/live/test_500" \
+  -re -acodec libfaac -ar 22050 -vcodec libx264 -s vga -b 300k -f flv "rtmp://localhost/live/test_300" \
+  -re -acodec libfaac -ar 22050 -vcodec libx264 -s qvga -b 150k -f flv "rtmp://localhost/live/test_150" \
+  -re -acodec libfaac -ar 22050 -vcodec libx264 -s qqvga -b 50k -f flv "rtmp://localhost/live/test_50"
+
+ffmpeg -re -i rtmp://server/live/high_FMLE_stream -acodec copy -vcodec x264lib -s 640x360 -b 500k -vpre medium -vpre baseline rtmp://server/live/baseline_500k -acodec copy -vcodec x264lib -s 480x272 -b 300k -vpre medium -vpre baseline rtmp://server/live/baseline_300k -acodec copy -vcodec x264lib -s 320x200 -b 150k -vpre medium -vpre baseline rtmp://server/live/baseline_150k -acodec libfaac -vn -ab 48k rtmp://server/live/audio_only_AAC_48k
+
+ffmpeg -re -i rtmp://server/live/high_FMLE_stream -c:a copy -c:v x264lib -s 640x360 -x264opts bitrate=500:profile=baseline:preset=slow rtmp://server/live/baseline_500k -c:a copy -c:v x264lib -s 480x272 -x264opts bitrate=300:profile=baseline:preset=slow rtmp://server/live/baseline_300k -c:a copy -c:v x264lib -s 320x200 -x264opts bitrate=150:profile=baseline:preset=slow rtmp://server/live/baseline_150k -c:a libfaac -vn -b:a 48k rtmp://server/live/audio_only_AAC_48k

@@ -1,0 +1,8 @@
+logs
+/opt/elemental_se/web/log/10000
+/opt/elemental_se/web/log
+
+Monitoreo de las GPUs (pero estos comando no funcionan, solo referencia)
+nvidia-settings -q all
+nvidia-settings -q screens -q gpus -q framelocks -q vcs -q gvis -q fans
+nvidia-settings -q GPUUtilization -q useddedicatedgpumemory
