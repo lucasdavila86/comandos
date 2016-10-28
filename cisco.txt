@@ -1,0 +1,16 @@
+ip route 186.65.98.244 255.255.255.255 200.59.197.89
+	# agrega una ruta estática hacia 186.65.98.244 saliendo por el router 200.59.197.89
+no ip route 186.65.98.244 255.255.255.255 200.59.197.89
+	# elimina la ruta estática
+show ip route 186.65.98.244
+	# muestra por que router sale el tráfico hacia 186.65.98.244
+sh ip bgp neighbors 200.59.197.89 received-routes
+	# muestra las rutas aprendidas a través de 200.59.197.89 
+sh ip bgp neighbors 200.59.197.89 received-routes | include >
+	#
+show ip bgp summary
+	# 
+show running-config interface vlan 352
+	#
+traceroute
+	# al llamarlo sin parametros, permite elegir la source IP

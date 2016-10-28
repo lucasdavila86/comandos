@@ -1,0 +1,17 @@
+﻿Hay tres modos visuales
+ * character based {v}
+ * line mode {S-v}
+ * block mode {C-v}
+
+== Para eliminar multiples lineas
+=== Metodo con marca
+Ir a la primera linea y crear una marca, tipear: m a
+Ir a la ultima linea y tipear: d ' a
+
+=== Método visual
+Ir al modo visual "linea" ingresar {S-v} (shift + v)
+Seleccionar las lineas (moverse con las flechas es una opción)
+Ingresar: d (delete)
+
+=== Deshabilitar el visualbell y el errorbell
+set noeb vb t_vb=

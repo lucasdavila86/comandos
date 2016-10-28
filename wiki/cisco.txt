@@ -1,0 +1,2 @@
+CTRL+SHIFT+6
+	# escape sequence, al apretar esta conbinación de teclas se corta el proceso por ejemplo del traceroute

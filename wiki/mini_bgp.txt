@@ -1,0 +1,38 @@
+show ip route 186.65.98.244 # por donde aprende la ruta hacia 186.65.98.244
+Routing entry for 186.65.98.0/24
+  Known via "bgp 27988", distance 20, metric 0
+  Tag 11058, type external
+  Last update from 200.0.17.124 05:32:25 ago
+  Routing Descriptor Blocks:
+    200.0.17.124, from 200.0.17.1, 05:32:25 ago
+      Route metric is 0, traffic share count is 1
+      AS Hops 3
+      Route tag 11058
+
+sh ip route 200.0.17.124 # para ver en que vlan está la ip "Routing Descriptor Blocks"
+Routing entry for 200.0.17.0/24
+  Known via "connected", distance 0, metric 0 (connected, via interface)
+  Routing Descriptor Blocks:
+  * directly connected, via Vlan353
+      Route metric is 0, traffic share count is 1
+
+sh run int vl 353 # descripcion de la vlan
+!
+interface Vlan353
+ description Peer con CABASE
+ ip address 200.0.17.118 255.255.255.0
+ load-interval 30
+end
+
+
+sh ip bg summary
+Neighbor        V    AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+181.15.5.161    4  7303  835498   18096        0    0    0 26w1d    Idle (Admin)
+200.0.17.1      4 11058  633078  471977 17663183    0    0 2w2d        10191
+200.55.245.115  4 27988 2682093 1431377 17663186    0    0 47w1d       31454
+200.59.197.89   4  7049 1627858  928449 17663183    0    0 23w2d       14801
+
+=== Configurar una ruta estática para que salga por algún proveedor en particular
+conf t
+ip route 186.65.98.244 255.255.255.255 200.0.17.124 # de esta forma cuando se intente conectar contra 186... va a salir por 200.0.17.124 (ip local del router,peer contra CABASE)
+# si reemplazamos por 200.59.197.89 va a salir por Silica

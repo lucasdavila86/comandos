@@ -1,0 +1,17 @@
+EHLO server.example.com
+MAIL FROM: <support@port25.com>
+RCPT TO: <support@port25.com>
+DATA
+From: "John Smith" <jsmith@port25.com>
+To: "Jane Doe" <jdoe@port25.com>
+Subject: test message sent from manual telnet session
+Date: Wed, 11 May 2011 16:19:57 -0400
+Hello World,
+This is a test message sent from a manual telnet session.
+
+Yours truly,
+SMTP administrator
+
+.
+
+QUIT

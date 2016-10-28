@@ -1,0 +1,14 @@
+set tabstop=4 shiftwidth=4 expandtab
+    #desc: changes the tabs for 4 spaces (tabstop), and change indentation to 4 spaces (shiftwidth)
+
+set shiftround
+set softtabstop=4
+
+set hlsearch
+set incsearch
+set ignoresearch
+set smartcase
+
+set nobackup
+set nowritebackup
+set noswapfile

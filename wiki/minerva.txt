@@ -1,6 +1,21 @@
 # Minerva
 
 ## Backoffice
+### Ingesta VOD
+upload the metadata folder to ftp://172.30.240.97/
+/home/ftprcs/video-output/
+ADI.XML ADI.DTD poster.png
+change the video and poster url
+video to http://cdn.rocstar.tv/vod/disk2/FX_212990_HDTV_51ENG_TVVOD_11_2015/VOD-mpeg-file-enc/FX_212990_HDTV_51ENG_TVVOD_11_2015.m3u8
+poster to http://172.30.240.97/ftprcs/FX_212990_VODHD_WalkingDeadS6FirstTimeAgainThe_HD_11_2015/WalkingDeadS6FirstTimeAgainThe_Poster_HD.png
+Check Title_Brief string length, 19 chars max
+Check for poster tag, the providers sends the tag "posterpng" and must be "poster"
+#### Logs 
+/home/vig/log/itvlink.log
+
+## nDVR
+http://172.30.153.4:7780/epg-manager/index.html
 
 ### Logs
 /itvmgr/log
+/home/vig/log/itvlink.log - import VOD metadata, ingest

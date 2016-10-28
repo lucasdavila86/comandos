@@ -1,0 +1,18 @@
+# get all indexes
+curl 'localhost:9200/_cat/indices?v'
+
+# delete index
+curl -XDELETE 'http://localhost:9200/logstash-2016.09.21.1/'
+
+# reindex
+curl -XPOST localhost:9200/_reindex?pretty -d'{
+  "source": {
+    "index": "logstash-2016.09.21"
+  },
+  "dest": {
+    "index": "logstash-2016.09.21.1"
+  }
+}'
+
+# check the mapping
+curl localhost:9200/logstash-2016.07.13/_mapping?pretty

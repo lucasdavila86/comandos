@@ -1,13 +1,50 @@
 == bash
 grep '.m3u8\|Manifest' linkslist.txt | cut -c 29- | cut -d"\"" -f1 | grep _07_2015  >> cleanlinklist.txt
 	#descrp: "takes out the HLS links from a html"
+egrep -e "core id" -e ^physical /proc/cpuinfo|xargs -l2 echo|sort -u
+	#url: https://access.redhat.com/discussions/480953
+	#descrp: show how many processors has the server
+nproc
+	#descrp: number of processors
+netstat -g
+	#descrp: show multicast joined groups
 
 == wget
 wget -m -c --limit-rate=500k ftp://ftp-colsecor:ftpc0ls3c0r@ftp.syt.com/
 	#descrp: "perform a site mirror, limiting the used bandwith and let you continue the download"
+wget http://example.com/images/{1..20}.jpg
+	#descrp: "Download a list of sequentially numbered files from a server"
+
+== windows
+ffmpeg -i http://172.30.153.100/live/telefe/playlist.m3u8 -f rawvideo -y NUL
+	#descrp:"plays" a hls live or VoD stream saving it to NUL (like linux /dev/null).
+netsh wlan show profile name="SYT-LAB" key=clear
+	#descrp: show WLAN profile, and display the passwd in clear
+WMIC CPU Get /Format:List
+WMIC CPU Get DeviceID,NumberOfCores,NumberOfLogicalProcessors
+	#descrp: shows how many cores and how many logical processors (HT) has the CPU
+echo %NUMBER_OF_PROCESSORS%
+	#descrp: shows the total logical processors 
+
 
 == Powershell
 (gci example.txt).LastWriteTime = Get-Date
 	#descrp: update the "Date modified" parameter of example.txt
 foreach ($file in Get-ChildItem) { $file.LastWriteTime = Get-Date }
 	#descrp: update the "Date modified" for all files in the folder
+
+curl -s -D - http://yahoo.com -o $null
+curl -s -D - http://yahoo.com -o /dev/null
+	#descrp: show only response headers
+
+== Python
+pip install --user virtualenvwrapper
+	#descrp: installs package locally for the user, usually ~/.local
+import socket
+hostname = socket.gethostbyaddr("8.8.8.8")[0]
+print hostname
+google-public-dns-a.google.com
+
+== git
+git config --global http.sslVerify false
+git config http.sslVerify "false"

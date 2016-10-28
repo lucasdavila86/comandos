@@ -1,0 +1,3 @@
+nvidia-smi
+nvidia-smi -i 0 -q
+nvidia-smi --query-gpu=utilization.gpu,utilization.memory,memory.total,memory.free,memory.used --format=csv --id=0000:04:00.0 -l1

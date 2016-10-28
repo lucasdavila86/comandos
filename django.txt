@@ -1,0 +1,110 @@
+./manage.py startapp polls2
+./manage.py makemigrations polls
+./manage.py sqlmigrate polls 0001
+./manage.py check
+./manage.py migrate
+
+./manage.py shell
+./manage.py runserver 0.0.0.0:8000
+python manage.py runserver --insecure 0.0.0.0:8000
+	# makes django test server to serve the static content in case you are using the DEBUG = False
+
+./manage.py inspectdb
+	# Auto-generate the models
+
+change user password
+(rocstarott)root@hlsencoder:~/rocstarott/pochoclo# python manage.py shell
+Python 2.7.6 (default, Mar 22 2014, 22:59:56)
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from django.contrib.auth.models import User
+>>> u = User.objects.get(username__exact='ngraizer')
+>>> u.set_password('Nicolas.123')
+>>> u.save()
+
+
+django-admin startproject ott
+
+migrate from sqlite to postgres (postgresql already installed)
+in ubuntu, first install libpq-dev
+ apt-get install libpq-dev
+
+the install on your virtualenv psycopg2
+ pip install psycopg2
+
+dump your data from the sqlite DB
+ python manage.py dumpdata > sqlite_data_20160407.json
+
+stop your server (gunicorn?)
+ supervisorctl stop gu_rocstarott
+
+change your settings.py to point to your postgres DB
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'rocstarott',
+        'USER': 'rocstar',
+        'PASSWORD': 'Hendrix;',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+
+run syncdb
+ python manage.py migrate --run-syncdb
+
+enter into the DB shell
+ python manage.py dbshell
+and run TRUNCATE django_content_type CASCADE;
+TRUNCATE quickly removes all rows from a set of tables. It has the same effect as an unqualified DELETE on each table, but since it does not actually scan the tables it is faster. Furthermore, it reclaims disk space immediately, rather than requiring a subsequent VACUUM operation. This is most useful on large tables.
+When you run syncdb Django populates the database with new data, and to load all your data you need to remove all the newly-define content types.
+# source http://stackoverflow.com/questions/3076928/switching-django-project-from-sqlite3-backend-to-postgresql-failes-when-loading
+
+load data 
+ python manage.py loaddata sqlite_data_20160407.json
+
+start your server
+ supervisorctl start gu_rocstarott
+
+### Sessions
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
+
+session_key = '8cae76c505f15432b48c8292a7dd0e54'
+
+session = Session.objects.get(session_key=session_key)
+uid = session.get_decoded().get('_auth_user_id')
+user = User.objects.get(pk=uid)
+
+print user.username, user.get_full_name(), user.email
+
+### Localization
+python manage.py makemessages -l es
+python manage.py compilemessages
+
+python setup.py sdist
+# creates python package
+pip install z:\path\to\package.zip
+# installs package
+
+
+from maxlogins.models import Visitor
+from django.contrib.auth.models import User
+u = User.objects.get(username="admin")
+
+u.visitor.all()
+
+u.visitor.filter(session_key="vu60icbrfxtvchu9jlyz75gzhk29k7y5").exists()
+u.visitor.count()
+
+>>> u.visitor.filter(session_key="vu60icbrfxtvchu9jlyz75gzhk29k7y5").exists()
+True
+>>> u.visitor.count()
+1
+
+[s["session_key"] for s in u.visitor.all().values("session_key")]
+[s["session_key"] for s in u.visitor.all().values()]
+# converts the list of dict to a list with just the session keys
+
+from django.contrib.sessions.models import Session
+Session.objects.get(session_key__in=[u'vu60icbrfxtvchu9jlyz75gzhk29k7y5', u'aaaa'])
+
