@@ -8,6 +8,8 @@ nproc
 	#descrp: number of processors
 netstat -g
 	#descrp: show multicast joined groups
+openssl x509 -in /home/lucas/teatrix.rocstar.tv/bundle.cer -text -noout | less
+	#descrp: check certificate data
 
 == wget
 wget -m -c --limit-rate=500k ftp://ftp-colsecor:ftpc0ls3c0r@ftp.syt.com/

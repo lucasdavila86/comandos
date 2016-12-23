@@ -16,3 +16,10 @@ curl -XPOST localhost:9200/_reindex?pretty -d'{
 
 # check the mapping
 curl localhost:9200/logstash-2016.07.13/_mapping?pretty
+
+# check health & recovery
+curl -XGET 'localhost:9200/_cat/health?pretty'
+curl -XGET 'localhost:9200/_cat/recovery?pretty'
+
+# haystack
+http://localhost:9400/haystack/_search?pretty
