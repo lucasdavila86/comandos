@@ -10,23 +10,33 @@ netstat -g
 	#descrp: show multicast joined groups
 openssl x509 -in /home/lucas/teatrix.rocstar.tv/bundle.cer -text -noout | less
 	#descrp: check certificate data
+openssl x509 -in /home/lucas/selfsigned.cer -noout -sha1 -fingerprint
+	#descrp: check certificate sha1 fingerprint
+openssl x509 -in /home/lucas/selfsigned.cer -noout -sha256 -fingerprint
+	#descrp: check certificate sha256 fingerprint
 
 == wget
 wget -m -c --limit-rate=500k ftp://ftp-colsecor:ftpc0ls3c0r@ftp.syt.com/
 	#descrp: "perform a site mirror, limiting the used bandwith and let you continue the download"
 wget http://example.com/images/{1..20}.jpg
 	#descrp: "Download a list of sequentially numbered files from a server"
+curl -v -w "\n    time_namelookup:  %{time_namelookup}\n       time_connect:  %{time_connect}\n    time_appconnect:  %{time_appconnect}\n   time_pretransfer:  %{time_pretransfer}\n      time_redirect:  %{time_redirect}\n time_starttransfer:  %{time_starttransfer}\n                    ----------\n         time_total:  %{time_total}\n" http://la-guia.com.ar/mnp/encuentro/playlist.m3u8
+	#descrp: make curl show times
 
 == windows
 ffmpeg -i http://172.30.153.100/live/telefe/playlist.m3u8 -f rawvideo -y NUL
 	#descrp:"plays" a hls live or VoD stream saving it to NUL (like linux /dev/null).
+netsh interface ip show joins
+	#descrp: show multicast joins
 netsh wlan show profile name="SYT-LAB" key=clear
 	#descrp: show WLAN profile, and display the passwd in clear
 WMIC CPU Get /Format:List
 WMIC CPU Get DeviceID,NumberOfCores,NumberOfLogicalProcessors
 	#descrp: shows how many cores and how many logical processors (HT) has the CPU
 echo %NUMBER_OF_PROCESSORS%
-	#descrp: shows the total logical processors 
+	#descrp: shows the total logical processors
+getlinks.py -u admin -p c0ls3c0r$2014 -f TX_ 172.30.240.1 | findstr /r /c:VOD-mpeg-file/ > teatrix_contents.txt
+	#descrp: grep like findstr
 
 
 == Powershell
@@ -46,7 +56,15 @@ import socket
 hostname = socket.gethostbyaddr("8.8.8.8")[0]
 print hostname
 google-public-dns-a.google.com
+import pip; pip.main(['install','unicodecsv'])
+	#descrp: install package from python shell
 
 == git
 git config --global http.sslVerify false
 git config http.sslVerify "false"
+
+== docker
+docker rm $(docker ps -a -q)
+	#descrp: delete all containers
+docker rmi $(docker images -a -q)
+	#descrp: delete all images
