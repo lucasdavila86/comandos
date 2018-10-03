@@ -14,6 +14,12 @@ openssl x509 -in /home/lucas/selfsigned.cer -noout -sha1 -fingerprint
 	#descrp: check certificate sha1 fingerprint
 openssl x509 -in /home/lucas/selfsigned.cer -noout -sha256 -fingerprint
 	#descrp: check certificate sha256 fingerprint
+tar -cO media | openssl aes-256-cbc -a -out backup.enc
+	# create tar file with all the contents in 'media' folder and encrypts that file with aes-256 (base64 output)
+openssl aes-256-cbc -d -in ../backup.enc -a | tar -xf -
+	# decrypts and untar the file backup.enc
+[[ "$(md5sum < elemental_production_server_2.12.0.401325.run)" = "46159302bf9f056aeb5d70f5e2facbfc  -" ]] && echo Pass || echo Fail
+	# check md5sum without hashes file
 
 == wget
 wget -m -c --limit-rate=500k ftp://ftp-colsecor:ftpc0ls3c0r@ftp.syt.com/
@@ -37,7 +43,14 @@ echo %NUMBER_OF_PROCESSORS%
 	#descrp: shows the total logical processors
 getlinks.py -u admin -p c0ls3c0r$2014 -f TX_ 172.30.240.1 | findstr /r /c:VOD-mpeg-file/ > teatrix_contents.txt
 	#descrp: grep like findstr
-
+set PYTHONIOENCODING=UTF-8
+	#descrp: set python cli encoding
+py -3.4 -m venv c:\path\to\wherever\you\want\it
+	#descrp: create virtualenv with specific version of python
+certutil -hashfile Desktop\sandbox.txt MD5
+certutil -hashfile Desktop\sandbox.txt SHA1
+certutil -hashfile Desktop\sandbox.txt SHA256
+	# descrp: hash file with MD5, SHA1 or SHA256 hash function
 
 == Powershell
 (gci example.txt).LastWriteTime = Get-Date
