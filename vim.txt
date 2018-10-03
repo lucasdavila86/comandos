@@ -12,3 +12,6 @@ set smartcase
 set nobackup
 set nowritebackup
 set noswapfile
+
+set syntax=nginx
+    # set syntax highlighting to nginx type
