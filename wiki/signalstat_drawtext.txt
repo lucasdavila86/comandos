@@ -1,0 +1,5 @@
+time %{pts:hms}
+Y (%{metadata:lavfi.signalstats.YMIN}-%{metadata:lavfi.signalstats.YMAX})
+U (%{metadata:lavfi.signalstats.UMIN}-%{metadata:lavfi.signalstats.UMAX})
+V (%{metadata:lavfi.signalstats.VMIN}-%{metadata:lavfi.signalstats.VMAX})
+saturation maximum: %{metadata:lavfi.signalstats.SATMAX}

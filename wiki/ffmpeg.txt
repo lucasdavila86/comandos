@@ -13,3 +13,18 @@ ffprobe -hide_banner
 
 ffmpeg -i RCS_Sintel.mkv -f mpegts udp://239.255.1.95:56000?localaddr=192.168.160.236
 	#descrp: trancodes and sends an udp multicast TS from source addr 192.168.160.236
+
+ffmpeg -i http://www.portaldelmar.tv/live/atcco/track_0_2000/playlist.m3u8 -t 30 -c copy atcco_hls.ts
+	#dumps 30s of live HLS stream to TS file copying the codecs
+
+ffprobe -v error -print_format csv -select_streams v:0 -show_frames -i http://www.portaldelmar.tv/live/atcco/track_0_2000/playlist.m3u8
+	# selects the video frames and dumps data to a CSV format
+
+ffplay atcco.ts -vf signalstats=stat=brng+vrep+tout,drawtext=fontfile=/Windows/Fonts/arial.ttf:textfile=signalstat_drawtext.txt
+	# plays file printing data over the video, requires the template signalstat_drawtext.txt
+	# signalstat_drawtext.txt
+		time %{pts:hms}
+		Y (%{metadata:lavfi.signalstats.YMIN}-%{metadata:lavfi.signalstats.YMAX})
+		U (%{metadata:lavfi.signalstats.UMIN}-%{metadata:lavfi.signalstats.UMAX})
+		V (%{metadata:lavfi.signalstats.VMIN}-%{metadata:lavfi.signalstats.VMAX})
+		saturation maximum: %{metadata:lavfi.signalstats.SATMAX}
