@@ -1,0 +1,16 @@
+/system identity set name=nombre
+	# change hostname
+/ip address set interface=ether1 address=10.255.255.254 numbers=0
+	# change ip address
+ip dhcp-client add interface=ether2 disable=no
+	# add dhcp
+
+/ip route print
+	# show routes
+/routing bgp instance add name=cdn_router as=65531 router-id=10.255.255.104
+	# add new bgp instance
+/routing bgp instance disable <name>
+/routing bgp instance remove <name>
+
+/routing bgp peer add remote-as=65531 remote-address=10.255.255.102
+	# add peer
