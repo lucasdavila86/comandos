@@ -1,6 +1,8 @@
 == bash
 grep '.m3u8\|Manifest' linkslist.txt | cut -c 29- | cut -d"\"" -f1 | grep _07_2015  >> cleanlinklist.txt
 	#descrp: "takes out the HLS links from a html"
+grep -i -o '[A-Z0-9._%+-]\+@[A-Z0-9.-]\+\.[A-Z]\{2,4\}'
+	# grep con regexp para mails
 egrep -e "core id" -e ^physical /proc/cpuinfo|xargs -l2 echo|sort -u
 	#url: https://access.redhat.com/discussions/480953
 	#descrp: show how many processors has the server
@@ -20,8 +22,18 @@ openssl aes-256-cbc -d -in ../backup.enc -a | tar -xf -
 	# decrypts and untar the file backup.enc
 [[ "$(md5sum < elemental_production_server_2.12.0.401325.run)" = "46159302bf9f056aeb5d70f5e2facbfc  -" ]] && echo Pass || echo Fail
 	# check md5sum without hashes file
+sudo sysctl -w kernel.sched_rt_runtime_us=1000000
+	# allow application to utilize up to ~100% of the CPUs assigned to it
+systemd-detect-virt
+	# Detect execution in a virtualized environment
+ip maddr show
+	# show multicast joins
+ip addr add 233.54.12.234/32 dev eth1 autojoin
+	# static multicast join
+netstat -g
+	# show multicast joins
 
-== wget
+== wget/curl
 wget -m -c --limit-rate=500k ftp://ftp-colsecor:ftpc0ls3c0r@ftp.syt.com/
 	#descrp: "perform a site mirror, limiting the used bandwith and let you continue the download"
 wget http://example.com/images/{1..20}.jpg
