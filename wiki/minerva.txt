@@ -13,8 +13,16 @@ Check for poster tag, the providers sends the tag "posterpng" and must be "poste
 #### Logs 
 /home/vig/log/itvlink.log
 
+## Oracle DB
+sqlplus md/vss@mddb @/itvmgr/epg/tbepg/sql/disable_constraints.sql
+
 ## nDVR
 http://172.30.153.4:7780/epg-manager/index.html
+
+## EPG
+Parece que la descarga desde ftp.filestv.com.ar
+U: MinervaCV
+P: MinervaCV
 
 ### Logs
 /itvmgr/log
