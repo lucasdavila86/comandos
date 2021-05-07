@@ -32,6 +32,11 @@ ip addr add 233.54.12.234/32 dev eth1 autojoin
 	# static multicast join
 netstat -g
 	# show multicast joins
+socat - OPENSSL:pop.gmx.net:995
+openssl s_client -quiet -connect pop.gmx.net:995
+	# connect to POP server over TLS
+openssl s_client -quiet -connect mail.rocstar.tv:587 -starttls smtp
+	# connect to smtp server over tls
 
 == wget/curl
 wget -m -c --limit-rate=500k ftp://ftp-colsecor:ftpc0ls3c0r@ftp.syt.com/
