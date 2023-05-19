@@ -92,6 +92,8 @@ import pip; pip.main(['install','unicodecsv'])
 == git
 git config --global http.sslVerify false
 git config http.sslVerify "false"
+git archive --remote=<remote> master
+	#descrp: get the source without including the .git folder
 
 == docker
 docker rm $(docker ps -a -q)
