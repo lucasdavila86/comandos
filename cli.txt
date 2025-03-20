@@ -96,6 +96,8 @@ git archive --remote=<remote> master
 	#descrp: get the source without including the .git folder
 find . -maxdepth 1 -mindepth 1 -type d -exec sh -c '(echo {} && cd {} && git status -s && echo)' \;
 	#descrp: run git status recursively
+git rev-parse --show-toplevel
+	#descrp: shows the repository root directory
 
 == docker
 docker rm $(docker ps -a -q)
