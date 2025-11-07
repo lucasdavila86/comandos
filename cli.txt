@@ -8,8 +8,6 @@ egrep -e "core id" -e ^physical /proc/cpuinfo|xargs -l2 echo|sort -u
 	#descrp: show how many processors has the server
 nproc
 	#descrp: number of processors
-netstat -g
-	#descrp: show multicast joined groups
 openssl x509 -in /home/lucas/teatrix.rocstar.tv/bundle.cer -text -noout | less
 	#descrp: check certificate data
 openssl x509 -in /home/lucas/selfsigned.cer -noout -sha1 -fingerprint
@@ -32,6 +30,8 @@ ip addr add 233.54.12.234/32 dev eth1 autojoin
 	# static multicast join
 netstat -g
 	# show multicast joins
+socat STDIO UDP4-RECV:22001,ip-add-membership=239.100.100.100:ens256 > /dev/null
+	#generate a join to multicast group over interface ens256
 socat - OPENSSL:pop.gmx.net:995
 openssl s_client -quiet -connect pop.gmx.net:995
 	# connect to POP server over TLS
