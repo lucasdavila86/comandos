@@ -24,6 +24,9 @@ ffplay atcco.ts -vf signalstats=stat=brng+vrep+tout,drawtext=fontfile=/Windows/F
 	# plays file printing data over the video, requires the template signalstat_drawtext.txt
 	# signalstat_drawtext.txt
 		time %{pts:hms}
+
+ffmpeg -re -f lavfi -i testsrc=size=1280x720:rate=30 -pix_fmt yuv420p -f mpegts udp://232.1.1.1:5000
+	# creates a test video signal and streams it out over multicast
 		Y (%{metadata:lavfi.signalstats.YMIN}-%{metadata:lavfi.signalstats.YMAX})
 		U (%{metadata:lavfi.signalstats.UMIN}-%{metadata:lavfi.signalstats.UMAX})
 		V (%{metadata:lavfi.signalstats.VMIN}-%{metadata:lavfi.signalstats.VMAX})
